@@ -1,7 +1,14 @@
 import React from 'react'
 
-function Grid() {
-  return <div>Grid</div>
+import { StyledGrid, StyledGridContent } from '../styles/StyledGrid'
+
+function Grid({ header, children }) {
+  return (
+    <StyledGrid>
+      <h1> {header}</h1>
+      <StyledGridContent>{children}</StyledGridContent>
+    </StyledGrid>
+  )
 }
 
 export default Grid

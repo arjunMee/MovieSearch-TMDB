@@ -14,7 +14,7 @@ function HeroImage({ image, title, text }) {
     >
       <StyledHeroImage image={image}>
         <div className='hrtoimzge-content'>
-          <div className='herimage-text'>
+          <div className='heroimage-text'>
             <h1>{title}</h1>
             <p>{text}</p>
           </div>

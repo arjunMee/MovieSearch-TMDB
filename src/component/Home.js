@@ -15,15 +15,45 @@ import {
   SEARCH_URL,
   POPULAR_URL,
 } from '../config'
+
 import { useHomeFetch } from './hooks/useHomeFetch'
+import noImage from './image/no_image.jpg'
 
 function Home() {
-  const [{ state, loading, error }, fetchMovies] = useHomeFetch()
+  const [
+    {
+      state: { movies, currentPage, totalPages, heroImage },
+      loading,
+      error,
+    },
+    fetchMovies,
+  ] = useHomeFetch()
+  const [searchTerm, setSearchTerm] = useState('')
+
+  if (!movies[0]) return <Spinner />
   return (
     <>
-      <HeroImage />
+      <HeroImage
+        image={`${IMAGE_BASE_URL}/${BACKDROP_SIZE}${heroImage.backdrop_path}`}
+        title={heroImage.original_title}
+        text={heroImage.overview}
+      />
       <SearchBar />
-      <Grid />
+      <Grid header={searchTerm ? 'Search Term' : 'Popular Movies'}>
+        {movies.map((movie) => (
+          <MovieThumb
+            key={movie.id}
+            clickabl
+            image={
+              movie.poster_path
+                ? `${IMAGE_BASE_URL}/${POSTER_SIZE}${movie.poster_path}`
+                : noImage
+            }
+            movieId={movie.id}
+            movieNAme={movie.original_title}
+          />
+        ))}
+      </Grid>
       <MovieThumb />
       <LoadMoreBtn />
       <Spinner />

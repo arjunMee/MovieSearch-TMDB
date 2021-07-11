@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { API_URL, API_KEY } from '../../config'
+import { POPULAR_URL } from '../../config'
 
 export const useHomeFetch = () => {
+  console.log(POPULAR_URL)
   const [state, setState] = useState({ movies: [] })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -9,23 +10,33 @@ export const useHomeFetch = () => {
   const fetchMovies = async (endpoint) => {
     setError(false)
     setLoading(true)
+    console.log('hello')
+
+    const isLoadMore = endpoint.search('page')
+
     try {
       const result = await (await fetch(endpoint)).json()
       setState((prev) => ({
         ...prev,
-        movies: [...result.results],
+        movies:
+          isLoadMore !== -1
+            ? [...prev.movies, ...result.results]
+            : [...result.results],
         heroImage: prev.heroImage || result.results[0],
         currentPage: result.page,
-        totalPage: result.total_pages,
+        totalPages: result.total_pages,
       }))
     } catch (error) {
+      setError(true)
       console.log(error)
     }
+
     setLoading(false)
   }
 
   useEffect(() => {
-    fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`)
+    console.log('hello')
+    fetchMovies(POPULAR_URL)
   }, [])
 
   return [{ state, loading, error }, fetchMovies]
