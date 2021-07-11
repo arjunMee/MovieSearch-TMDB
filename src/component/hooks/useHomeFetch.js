@@ -10,7 +10,6 @@ export const useHomeFetch = () => {
   const fetchMovies = async (endpoint) => {
     setError(false)
     setLoading(true)
-    console.log('hello')
 
     const isLoadMore = endpoint.search('page')
 

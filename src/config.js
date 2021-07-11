@@ -14,6 +14,13 @@ const SEARCH_URL = `${API_URL}search/movie?api_key=${API_KEY}&query=`
 // https://api.themoviedb.org/3/movie/popular?api_key=a09bb7abb5a4f39c383b3d2fbc567f8f
 const POPULAR_URL = `${API_URL}movie/popular?api_key=${API_KEY}`
 
+// const searchEndPoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${
+//   currentPage + 1
+// }`
+// const popularEndPoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${
+//   currentPage + 1
+// }`
+
 export {
   API_URL,
   API_KEY,
