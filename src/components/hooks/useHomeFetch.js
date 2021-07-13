@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import { POPULAR_URL } from '../../config'
+import { POPULAR_BASE_URL } from '../../config'
 
 export const useHomeFetch = () => {
-  console.log(POPULAR_URL)
   const [state, setState] = useState({ movies: [] })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -15,6 +14,7 @@ export const useHomeFetch = () => {
 
     try {
       const result = await (await fetch(endpoint)).json()
+
       setState((prev) => ({
         ...prev,
         movies:
@@ -34,8 +34,7 @@ export const useHomeFetch = () => {
   }
 
   useEffect(() => {
-    console.log('hello')
-    fetchMovies(POPULAR_URL)
+    fetchMovies(POPULAR_BASE_URL)
   }, [])
 
   return [{ state, loading, error }, fetchMovies]
