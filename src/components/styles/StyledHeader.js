@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from "styled-components/macro";
 
 export const StyledHeader = styled.div`
   background: #1c1c1c;
@@ -17,7 +17,7 @@ export const StyledHeader = styled.div`
       min-height: 0px;
     }
   }
-`
+`;
 
 export const StyledRMDBLogo = styled.img`
   width: 100px;
@@ -26,7 +26,7 @@ export const StyledRMDBLogo = styled.img`
     width: 60px;
     margin-top: 5px;
   }
-`
+`;
 
 export const StyledTMDBLogo = styled.img`
   width: 122px;
@@ -37,4 +37,4 @@ export const StyledTMDBLogo = styled.img`
     display: inline-block;
     width: 80px;
   }
-`
+`;
