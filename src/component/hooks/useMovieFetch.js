@@ -6,6 +6,7 @@ export const useMovieFetch = (movieId) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
+  // without call back eachtime it will think fetch data to be new function
   const fetchData = useCallback(async () => {
     setError(false)
     setLoading(true)
@@ -13,6 +14,26 @@ export const useMovieFetch = (movieId) => {
     try {
       const endpoint = `${API_URL}movie/${movieId}?api_key=${API_KEY}`
       const result = await (await fetch(endpoint)).json()
-    } catch (error) {}
+      const creditsEndPoint = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`
+      const creditsResult = await (await fetch(creditsEndPoint)).json()
+      const directors = creditsResult.crew.filter(
+        (member) => member.job === 'Director'
+      )
+
+      setState({
+        ...result,
+        actor: creditsResult.cast,
+        directors,
+      })
+    } catch (error) {
+      setError(true)
+    }
+    setLoading(false)
   }, [movieId])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
+  return [state, loading, error]
 }
